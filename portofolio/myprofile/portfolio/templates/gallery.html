@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }} - My Profile{% endblock %}
+
+{% block extra_css %}
+<style>
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+    .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        color: white;
+        padding: 20px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center py-5 bg-light mb-4">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Gallery</h1>
+        <p class="lead">Dokumentasi Kegiatan & Prestasi</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for image in images %}
+        <div class="col-md-4 mb-4">
+            <div class="gallery-item">
+                {% if "http" in image.image %}
+                    <img src="{{ image.image }}" alt="{{ image.title }}">
+                {% else %}
+                    <img src="{% static image.image %}" alt="{{ image.title }}">
+                {% endif %}
+                <div class="gallery-overlay">
+                    <h5 class="fw-bold">{{ image.title }}</h5>
+                    <p class="mb-0 small">{{ image.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-5">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-5">
+                <h3>Tertarik berkenalan dengan saya?</h3>
+                <p class="lead">Jangan ragu untuk berteman dengan saya yawwwww!</p>
+                <a href="mailto:email-kamu@gmail.com" class="btn btn-primary btn-lg">
+                    Hubungi Saya
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

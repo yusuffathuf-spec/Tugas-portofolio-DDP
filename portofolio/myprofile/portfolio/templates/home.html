@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }} - My Profile{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-4">Halo, Saya {{ name }}</h1>
+        <p class="lead fs-4">{{ profession }}</p>
+        <a href="{% url 'portfolio:about' %}" class="btn btn-light btn-lg mt-3">
+            Lebih Lanjut <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body p-5">
+                    <h2 class="card-title mb-4"><i class="fas fa-user-tie text-primary"></i> Tentang Saya</h2>
+                    <p class="lead">{{ description }}</p>
+                    
+                    <h3 class="mt-5 mb-3"><i class="fas fa-code text-primary"></i> Keahlian</h3>
+                    <div class="row">
+                        {% for skill in skills %}
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 bg-light rounded">
+                                <i class="fas fa-check-circle text-success"></i> {{ skill }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                    <h5>Email</h5>
+                    <p>{{ email }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-phone fa-3x text-success mb-3"></i>
+                    <h5>Telepon</h5>
+                    <p>{{ phone }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-map-marker-alt fa-3x text-danger mb-3"></i>
+                    <h5>Lokasi</h5>
+                    <p>{{ location }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
